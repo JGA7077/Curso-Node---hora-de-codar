@@ -1,0 +1,13 @@
+Fala galera!
+
+
+Para melhor andamento desta tarefa, e também comparação com o meu código ao final dela, determinem a versão do inquirer para a 8.1.2, desta maneira:
+
+
+npm install inquirer@8.1.2
+
+
+Como este pacote evoluiu, a maneira de importar as funções é diferente nas versões mais recentes
+
+
+Bom curso a todos!
