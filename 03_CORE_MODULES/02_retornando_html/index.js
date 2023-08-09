@@ -6,7 +6,7 @@ const server = http.createServer((req, res) => {
   res.statusCode = 200;
 
   res.setHeader('Content-Type', 'text/html');
-  res.end('<h1>Olá, este é meu primeiro server com HTML</h1>')
+  res.end('<h1>Olá, este é meu primeiro server com HTML</h1><p>Testando atualização</p>')
 })
 
 server.listen(port, () => {
