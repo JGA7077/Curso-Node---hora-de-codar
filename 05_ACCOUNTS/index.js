@@ -31,7 +31,7 @@ function operations() {
         deposit()
         break;
       case 'Consultar Saldo':
-        
+        getAccountBalance();
         break;
       case 'Sacar':
         
@@ -131,8 +131,6 @@ function deposit() {
 }
 
 function checkAccount(accountName) {
-  console.log('checkAccount accountName ==>', accountName);
-
   if (!fs.existsSync(`accounts/${accountName}.json`)) {
     console.log(chalk.bgRed.black('Esta conta não existe, escolha outro nome!'));
     return false;
@@ -169,4 +167,31 @@ function getAccount(accountName) {
   })
 
   return JSON.parse(accountJSON)
+}
+
+// show account balance
+function getAccountBalance() {
+  inquirer.prompt([{
+    name: 'accountName',
+    message: 'Qual o nome da sua conta?'
+  }])
+  .then((answer) => {
+    const {accountName} = answer;
+
+    // verify if account exists
+    if (!checkAccount(accountName)) {
+      return getAccountBalance()
+    }
+
+    const accountData = getAccount(accountName);
+
+    console.log(chalk.bgBlue.black(
+      `Olá, o saldo da sua conta é de R$${accountData.balance}`
+    ));
+
+    operations();
+  })
+  .catch((err) => {
+    console.log('err ==>', err);
+  })
 }
