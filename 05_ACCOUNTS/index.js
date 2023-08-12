@@ -27,7 +27,19 @@ function operations() {
       case 'Criar Conta':
         createAccount();
         break;
-    
+      case 'Depositar':
+        
+        break;
+      case 'Consultar Saldo':
+        
+        break;
+      case 'Sacar':
+        
+        break;
+      case 'Sair':
+        console.log(chalk.bgBlue.black('Obrigado por usar o Accounts!'));
+        process.exit();
+        break;
       default:
         break;
     }
