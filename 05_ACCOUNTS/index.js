@@ -216,8 +216,7 @@ function withdraw() {
     .then((answer) => {
       const {amount} = answer
 
-      console.log('amount ==>', amount);
-      operations();
+      removeAmount(accountName, amount)
     })
     .catch((err) => {
       console.log('err ==>', err);
@@ -226,4 +225,31 @@ function withdraw() {
   .catch((err) => {
     console.log('err ==>', err);
   })
+}
+
+function removeAmount(accountName, amount) {
+  const accountData = getAccount(accountName);
+
+  if (!amount) {
+    console.log(chalk.bgRed.black('Ocorreu um erro, tente novamente mais tarde'));
+    return withdraw();
+  }
+
+  if (accountData.balance < amount) {
+    console.log(chalk.bgRed.black('Valor indisponível!'));
+    return withdraw();
+  }
+
+  accountData.balance = parseFloat(accountData.balance) - parseFloat(amount);
+
+  fs.writeFileSync(
+    `accounts/${accountName}.json`,
+    JSON.stringify(accountData),
+    (err) => {
+      console.log('err ==>', err);
+    }
+  )
+
+  console.log(chalk.green(`Foi realizado um saque de R$${amount} da sua conta!`));
+  operations();
 }
