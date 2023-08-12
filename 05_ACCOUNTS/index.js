@@ -13,7 +13,7 @@ function operations() {
     name: 'actions',
     message: 'O que você deseja fazer?',
     choices: [
-      'Criar conta',
+      'Criar Conta',
       'Consultar Saldo',
       'Depositar',
       'Sacar',
@@ -21,11 +21,24 @@ function operations() {
     ]
   }])
   .then((answer) => {
-    const {actions} = answer;
+    const { actions } = answer;
 
-    console.log('actions ==>', actions);
+    switch (actions) {
+      case 'Criar Conta':
+        createAccount();
+        break;
+    
+      default:
+        break;
+    }
   })
   .catch((err) => {
     console.log('err ==>', err);
   })
+}
+
+// create an account
+function createAccount() {
+  console.log(chalk.bgGreen.black('Parabéns por escolha o nosso banco!'));
+  console.log(chalk.green('Defina as opções da sua conta a seguir'));
 }
