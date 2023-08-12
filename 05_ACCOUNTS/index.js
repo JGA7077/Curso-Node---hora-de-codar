@@ -28,7 +28,7 @@ function operations() {
         createAccount();
         break;
       case 'Depositar':
-        
+        deposit()
         break;
       case 'Consultar Saldo':
         
@@ -92,4 +92,36 @@ function buildAccount() {
   .catch((err) => {
     console.log('err ==>', err);
   })
+}
+
+// add an amount to user account
+function deposit() {
+  inquirer.prompt([
+    {
+      name: 'accountName',
+      message: 'Qual o nome da sua conta?'
+    }
+  ])
+  .then((answer) => {
+    const {accountName} = answer
+
+    // verify if account exists
+    if (!checkAccount(accountName)) {
+      return deposit();
+    }
+  })
+  .catch((err) => {
+    console.log('err ==>', err);
+  })
+}
+
+function checkAccount(accountName) {
+  console.log('checkAccount accountName ==>', accountName);
+
+  if (!fs.existsSync(`accounts/${accountName}.json`)) {
+    console.log(chalk.bgRed.black('Esta conta não existe, escolha outro nome!'));
+    return false;
+  }
+
+  return true;
 }
