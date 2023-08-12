@@ -34,7 +34,7 @@ function operations() {
         getAccountBalance();
         break;
       case 'Sacar':
-        
+        withdraw();
         break;
       case 'Sair':
         console.log(chalk.bgBlue.black('Obrigado por usar o Accounts!'));
@@ -190,6 +190,38 @@ function getAccountBalance() {
     ));
 
     operations();
+  })
+  .catch((err) => {
+    console.log('err ==>', err);
+  })
+}
+
+// withdraw an amount from user account
+function withdraw() {
+  inquirer.prompt([{
+    name: 'accountName',
+    message: 'Qual o nome da sua conta?'
+  }])
+  .then((answer) => {
+    const {accountName} = answer
+
+    if (!checkAccount(accountName)) {
+      return withdraw();
+    }
+
+    inquirer.prompt([{
+      name: 'amount',
+      message: 'Quanto você deseja sacar?'
+    }])
+    .then((answer) => {
+      const {amount} = answer
+
+      console.log('amount ==>', amount);
+      operations();
+    })
+    .catch((err) => {
+      console.log('err ==>', err);
+    })
   })
   .catch((err) => {
     console.log('err ==>', err);
