@@ -21,3 +21,7 @@ Basicamente, precisamos invocar este método engine, que antes era opicional par
 
 
 Abraços! 
+
+////////////////////////////////////////////////////////
+
+npm i express-handlebars@5.3.3
