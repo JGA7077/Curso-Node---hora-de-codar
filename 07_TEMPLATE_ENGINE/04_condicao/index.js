@@ -21,7 +21,9 @@ app.get('/', (req, res) => {
 
   const auth = false;
 
-  res.render('home', { user, palavra, auth })
+  const approved = false;
+
+  res.render('home', { user, palavra, auth, approved })
 });
 
 app.listen(3333)
