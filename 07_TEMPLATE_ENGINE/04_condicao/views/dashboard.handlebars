@@ -1,2 +1,10 @@
 <h1>Dashboard</h1>
 <a href="/">Voltar</a>
+<ul>
+  {{#each productItems}}
+    <li>
+      <p>{{this.name}}</p>
+      <span>{{this.price}}</span>
+    </li>
+  {{/each}}
+</ul>

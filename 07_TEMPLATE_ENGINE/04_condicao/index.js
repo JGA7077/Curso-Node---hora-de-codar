@@ -6,7 +6,23 @@ app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 
 app.get('/dashboard', (req, res) => {
-  res.render('dashboard')
+
+  const productItems = [
+    {
+      name: 'mouse',
+      price: 30
+    },
+    {
+      name: 'notebook',
+      price: 3500
+    },
+    {
+      name: 'monitor',
+      price: 700
+    }
+  ]
+
+  res.render('dashboard', {productItems})
 })
 
 app.get('/', (req, res) => {
@@ -19,7 +35,7 @@ app.get('/', (req, res) => {
 
   const palavra = 'Teste'
 
-  const auth = false;
+  const auth = true;
 
   const approved = false;
 
