@@ -27,8 +27,23 @@ app.post('/books/insertbook', (req, res) => {
       return;
     };
 
-    res.redirect('/')
+    res.redirect('/books');
   });
+});
+
+app.get('/books', (req, res) => {
+  const sql = `SELECT * FROM books`
+
+  conn.query(sql, function(err, data) {
+    if (err) {
+      console.error('Error on Get Data', err)
+      return;
+    }
+
+    const books = data;
+
+    res.render('books', {books})
+  })
 })
 
 app.get('/', (req, res) => {
