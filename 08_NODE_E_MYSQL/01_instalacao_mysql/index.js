@@ -31,6 +31,22 @@ app.post('/books/insertbook', (req, res) => {
   });
 });
 
+app.get('/books/edit/:id', (req, res) => {
+  const {id} = req.params;
+  const sql = `SELECT * FROM books WHERE id = ${id}`;
+
+  conn.query(sql, (err, data) => {
+    if (err) {
+      console.error(`Error on Get Data With Id: ${id}`, err)
+      return;
+    }
+
+    const book = data[0];
+
+    res.render('editbook', {book});
+  })
+})
+
 app.get('/book/:id', (req, res) => {
   const {id} = req.params;
   const sql = `SELECT * FROM books WHERE id = ${id}`
