@@ -31,6 +31,21 @@ app.post('/books/insertbook', (req, res) => {
   });
 });
 
+app.post('/books/updatebook', (req, res) => {
+  const {id, title, pagesqty} = req.body;
+
+  const sql = `UPDATE books SET title = '${title}', pagesqty = '${pagesqty}' WHERE id = ${id}`
+
+  conn.query(sql, (err, data) => {
+    if (err) {
+      console.error(`Error on Update Data With Id: ${id}`, err)
+      return;
+    }
+
+    res.redirect('/books')
+  })
+})
+
 app.get('/books/edit/:id', (req, res) => {
   const {id} = req.params;
   const sql = `SELECT * FROM books WHERE id = ${id}`;
