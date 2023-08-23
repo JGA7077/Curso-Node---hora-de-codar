@@ -17,6 +17,20 @@ app.set('view engine', 'handlebars');
 
 app.use(express.static('public'));
 
+app.post('/books/remove/:id', (req, res) => {
+  const {id} = req.params;
+  const sql = `DELETE FROM books WHERE id = ${id}`
+
+  conn.query(sql, (err) => {
+    if (err) {
+      console.error(`Error on Delete Data With Id: ${id}`, err);
+      return;
+    };
+
+    res.redirect('/books')
+  })
+})
+
 app.post('/books/insertbook', (req, res) => {
   const {title, pagesqty} = req.body;
   const sql = `INSERT INTO books (title, pagesqty) VALUES ('${title}', '${pagesqty}')`
