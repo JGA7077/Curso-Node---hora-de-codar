@@ -4,7 +4,8 @@
   <a href="/">Adicionar livro</a>
   {{#each books}}
     <div>
-      #{{this.id}} - <span class="bold">{{this.title}}</span> - {{this.pagesqty}} páginas
+      #{{this.id}} - 
+      <span class="bold"><a href="/book/{{this.id}}">{{this.title}}</a></span> - {{this.pagesqty}} páginas
     </div>
   {{/each}}
 </div>
